@@ -5,7 +5,7 @@ var config = {
       MONGO_HOST:  'cluster0-shard-00-00.fqnkp.mongodb.net,cluster0-shard-00-01.fqnkp.mongodb.net,cluster0-shard-00-02.fqnkp.mongodb.net'
       ,MONGO_PORT: '27017'
       ,MONGO_SSL: 1
-      ,MONGO_DATABASE: 'alcaldia'
+      ,MONGO_DATABASE: 'GESTIONSALUD-DEV'
       ,MONGO_USER: 'user1'
       ,MONGO_PASSWORD: 'Fs1_ccc'
       ,MONGO_AUTH_SOURCE: 'admin'

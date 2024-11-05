@@ -18,12 +18,26 @@ module.exports = () => {
   const interfacesController = require("./controllers/interfaces");
   const rolesController = require("./controllers/roles");   
   const loginController = require("./controllers/login");       
+  const areasController = require("./controllers/areas");
+  const automatizacionController = require("./controllers/automatizacion");       
+  const centrosCostosController = require("./controllers/centrosCostos");   
+  const cargosController = require("./controllers/cargos");   
+  const competenciasController = require("./controllers/competencias");   
+  const sedesController = require("./controllers/sedes");   
+  const evalucionesController = require("./controllers/evaluciones");   
+  const formularios_evalucionesController = require("./controllers/formularios_evaluciones");   
+  const empleadosController = require("./controllers/empleados");   
+  const regionalesController = require("./controllers/regionales");   
+  const preguntasController = require("./controllers/preguntas");   
+
 
   // Aplica la validación JWT a todas las rutas debajo con authenticateJWT
   router.use('/interfaces', authenticateJWT);
 
   // FIN JWT
     
+  //automatizacion
+  requestsRouter.post("/automatizacion/crearMaestro", automatizacionController.crearMaestro);
 
   //login
   requestsRouter.post("/login/insertar", loginController.insertar)
@@ -34,7 +48,84 @@ module.exports = () => {
   requestsRouter.get("/empresas/consultar", empresasController.consultar);
   requestsRouter.post("/empresas/insertar", empresasController.insertar);
  
- 
+  //areas
+  requestsRouter.get("/areas/listar/:value", areasController.listar);
+  requestsRouter.get("/areas/:key/:value", areasController.buscar);
+  requestsRouter.post("/areas/insertar", areasController.insertar);
+  requestsRouter.post("/areas/eliminar", areasController.eliminar);
+  requestsRouter.post("/areas/actualizar", areasController.actualizar);
+  requestsRouter.post("/areas/consultar", areasController.consultar)
+
+  //centros de Costos
+  requestsRouter.get("/centrosCostos/listar/:value", centrosCostosController.listar);
+  requestsRouter.get("/centrosCostos/:key/:value", centrosCostosController.buscar);
+  requestsRouter.post("/centrosCostos/insertar", centrosCostosController.insertar);
+  requestsRouter.post("/centrosCostos/eliminar", centrosCostosController.eliminar);
+  requestsRouter.post("/centrosCostos/actualizar", centrosCostosController.actualizar);
+  requestsRouter.post("/centrosCostos/consultar", centrosCostosController.consultar)
+
+  //cargos
+  requestsRouter.get("/cargos/listar/:value", cargosController.listar);
+  requestsRouter.get("/cargos/:key/:value", cargosController.buscar);
+  requestsRouter.post("/cargos/insertar", cargosController.insertar);
+  requestsRouter.post("/cargos/eliminar", cargosController.eliminar);
+  requestsRouter.post("/cargos/actualizar", cargosController.actualizar);
+  requestsRouter.post("/cargos/consultar", cargosController.consultar)
+
+  requestsRouter.get("/sedes/listar/:value", sedesController.listar);
+  requestsRouter.get("/sedes/:key/:value", sedesController.buscar);
+  requestsRouter.post("/sedes/insertar", sedesController.insertar);
+  requestsRouter.post("/sedes/eliminar", sedesController.eliminar);
+  requestsRouter.post("/sedes/actualizar", sedesController.actualizar);
+  requestsRouter.post("/sedes/consultar", sedesController.consultar)
+
+  //competencias
+  requestsRouter.get("/competencias/listar/:value", competenciasController.listar);
+  requestsRouter.get("/competencias/:key/:value", competenciasController.buscar);
+  requestsRouter.post("/competencias/insertar", competenciasController.insertar);
+  requestsRouter.post("/competencias/eliminar", competenciasController.eliminar);
+  requestsRouter.post("/competencias/actualizar", competenciasController.actualizar);
+  requestsRouter.post("/competencias/consultar", competenciasController.consultar)
+
+  //evaluciones
+  requestsRouter.get("/evaluciones/listar/:value", evalucionesController.listar);
+  requestsRouter.get("/evaluciones/:key/:value", evalucionesController.buscar);
+  requestsRouter.post("/evaluciones/insertar", evalucionesController.insertar);
+  requestsRouter.post("/evaluciones/eliminar", evalucionesController.eliminar);
+  requestsRouter.post("/evaluciones/actualizar", evalucionesController.actualizar);
+  requestsRouter.post("/evaluciones/consultar", evalucionesController.consultar)
+
+  //formularios evaluciones
+  requestsRouter.get("/formularios_evaluciones/listar/:value", formularios_evalucionesController.listar);
+  requestsRouter.get("/formularios_evaluciones/:key/:value", formularios_evalucionesController.buscar);
+  requestsRouter.post("/formularios_evaluciones/insertar", formularios_evalucionesController.insertar);
+  requestsRouter.post("/formularios_evaluciones/eliminar", formularios_evalucionesController.eliminar);
+  requestsRouter.post("/formularios_evaluciones/actualizar", formularios_evalucionesController.actualizar);
+  requestsRouter.post("/formularios_evaluciones/consultar", formularios_evalucionesController.consultar)
+
+  //empleados
+  requestsRouter.get("/empleados/listar/:value", empleadosController.listar);
+  requestsRouter.get("/empleados/:key/:value", empleadosController.buscar);
+  requestsRouter.post("/empleados/insertar", empleadosController.insertar);
+  requestsRouter.post("/empleados/eliminar", empleadosController.eliminar);
+  requestsRouter.post("/empleados/actualizar", empleadosController.actualizar);
+  requestsRouter.post("/empleados/consultar", empleadosController.consultar)
+
+  //regionales
+  requestsRouter.get("/regionales/listar/:value", regionalesController.listar);
+  requestsRouter.get("/regionales/:key/:value", regionalesController.buscar);
+  requestsRouter.post("/regionales/insertar", regionalesController.insertar);
+  requestsRouter.post("/regionales/eliminar", regionalesController.eliminar);
+  requestsRouter.post("/regionales/actualizar", regionalesController.actualizar);
+  requestsRouter.post("/regionales/consultar", regionalesController.consultar)
+
+  //preguntas
+  requestsRouter.get("/preguntas/listar/:value", preguntasController.listar);
+  requestsRouter.get("/preguntas/:key/:value", preguntasController.buscar);
+  requestsRouter.post("/preguntas/insertar", preguntasController.insertar);
+  requestsRouter.post("/preguntas/eliminar", preguntasController.eliminar);
+  requestsRouter.post("/preguntas/actualizar", preguntasController.actualizar);
+  requestsRouter.post("/preguntas/consultar", preguntasController.consultar)
 
   //usuarios
   requestsRouter.post("/usuarios/listar", usuariosController.listar);
