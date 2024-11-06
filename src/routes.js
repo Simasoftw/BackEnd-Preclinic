@@ -29,7 +29,8 @@ module.exports = () => {
   const empleadosController = require("./controllers/empleados");   
   const regionalesController = require("./controllers/regionales");   
   const preguntasController = require("./controllers/preguntas");   
-
+  const asignacionEvaluacionesController = require("./controllers/asignacionEvaluaciones");  
+  const detalleAsignacionEvaluacionesController = require("./controllers/detalleAsignacionEvaluaciones");   
 
   // Aplica la validación JWT a todas las rutas debajo con authenticateJWT
   router.use('/interfaces', authenticateJWT);
@@ -138,6 +139,21 @@ module.exports = () => {
   requestsRouter.post("/usuarios/consultar", usuariosController.consultar);
   requestsRouter.get("/usuarios/listarPacientePorId/:value/:key",usuariosController.listarPacientePorId);
  
+  //asignacion Evaluaciones
+  requestsRouter.get("/asignacionEvaluaciones/listar/:value", asignacionEvaluacionesController.listar);
+  requestsRouter.get("/asignacionEvaluaciones/:key/:value", asignacionEvaluacionesController.buscar);
+  requestsRouter.post("/asignacionEvaluaciones/insertar", asignacionEvaluacionesController.insertar);
+  requestsRouter.post("/asignacionEvaluaciones/eliminar", asignacionEvaluacionesController.eliminar);
+  requestsRouter.post("/asignacionEvaluaciones/actualizar", asignacionEvaluacionesController.actualizar);
+  requestsRouter.post("/asignacionEvaluaciones/consultar", asignacionEvaluacionesController.consultar)
+
+  //detalle Asignacion Evaluaciones
+  requestsRouter.get("/detalleAsignacionEvaluaciones/listar/:value", detalleAsignacionEvaluacionesController.listar);
+  requestsRouter.get("/detalleAsignacionEvaluaciones/:key/:value", detalleAsignacionEvaluacionesController.buscar);
+  requestsRouter.post("/detalleAsignacionEvaluaciones/insertar", detalleAsignacionEvaluacionesController.insertar);
+  requestsRouter.post("/detalleAsignacionEvaluaciones/eliminar", detalleAsignacionEvaluacionesController.eliminar);
+  requestsRouter.post("/detalleAsignacionEvaluaciones/actualizar", detalleAsignacionEvaluacionesController.actualizar);
+  requestsRouter.post("/detalleAsignacionEvaluaciones/consultar", detalleAsignacionEvaluacionesController.consultar)
 
   //interfaces
   requestsRouter.get("/interfaces/", interfacesController.buscar);
