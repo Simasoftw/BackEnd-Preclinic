@@ -1,6 +1,6 @@
 
 const inputValidation = require('../../middlewares/inputValidation');
-const schema = require('./find.schema');
+const schema = require('../../models/evaluciones');
 const Repository = require('../../repositories/evaluciones');
 const constants = require('../../constants');
 
