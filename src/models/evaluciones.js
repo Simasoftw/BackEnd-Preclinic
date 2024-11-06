@@ -7,6 +7,7 @@ const Schema = schema({
     Descripcion: String, 
     tipoEvaluacion: String,
     arrayCompetencias: Array,
+    arrayPreguntasLibres: Array,
     IdEmpresa: String
 })
     
