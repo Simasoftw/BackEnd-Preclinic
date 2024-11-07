@@ -98,7 +98,7 @@ const repo = {
         for (const element of objData.ArrayEmpleados) {
           let objDetalle = {};
           objDetalle.NombreEvaluacion = objData.Evaluacion.label;
-          objDetalle.IdAsignacion = objData.Evaluacion.label;
+          objDetalle.IdAsignacion = response[0]._id;
           objDetalle.IdEvaluacion = objData.Evaluacion.value;
           objDetalle.IdLider = objData.Lider.value;
           objDetalle.NombreLider = objData.Lider.label;
