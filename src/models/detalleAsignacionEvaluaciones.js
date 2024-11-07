@@ -14,7 +14,11 @@ const Schema = schema({
     IdEmpresa: String,
     NombreUsuarioLogin: String,
     IdUsuarioLogin: String,
-    Estado: Boolean
+    Estado: Boolean,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 })
     
 

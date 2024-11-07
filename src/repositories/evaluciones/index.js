@@ -18,7 +18,7 @@ const repo = {
   listar: async (idEmpresa) => {
     try {
       //find query
-      let query = {"IdEmpresa": new mongo.ObjectID(idEmpresa)};
+      let query = {"IdEmpresa": idEmpresa};
      
       //find object
       let response = await Model.find(query).sort('Nombre');

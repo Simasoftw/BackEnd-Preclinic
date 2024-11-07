@@ -8,7 +8,11 @@ const Schema = schema({
     IdLider:String,
     NombreLider:String,
     IdEmpresa:String,
-    TotalColaboradores:String
+    TotalColaboradores:String,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 })
     
 
