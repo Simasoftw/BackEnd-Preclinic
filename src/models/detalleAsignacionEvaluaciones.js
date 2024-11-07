@@ -2,15 +2,19 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
-const Schema = schema({
+const Schema = schema({ 
+    NombreEvaluacion: String,
+    IdAsignacion: String,
     IdEvaluacion: String,
-    NombreEvaluacion:String, 
     IdLider: String,
-    NombreLider:String, 
+    NombreLider: String,
+    NumeroDocumentoEmpleado: String,
+    NombreEmpleado: String,
     IdEmpleado: String,
-    NombreEmpleado: String, 
-    Estado: Boolean, 
-    NumeroDocumentoEmpleado: String
+    IdEmpresa: String,
+    NombreUsuarioLogin: String,
+    IdUsuarioLogin: String,
+    Estado: Boolean
 })
     
 

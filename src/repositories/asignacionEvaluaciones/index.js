@@ -1,6 +1,7 @@
 
 const constants = require('../../constants');
 const Model = require('../../models/asignacionEvaluaciones');
+const ModelDetalle = require('../../models/detalleAsignacionEvaluaciones');
 const uuidv1 = require('../../../node_modules/uuid/v1');
 const mongo = require('mongodb'); 
 
@@ -20,6 +21,7 @@ const repo = {
       //find query
       let query = {"IdEmpresa": new mongo.ObjectID(idEmpresa)};
      
+      
       //find object
       let response = await Model.find(query).sort('Nombre');
 
@@ -80,9 +82,37 @@ const repo = {
     try {
 
       let status, failure_code, failure_message;
-
+    
       //find object
-      let response = await Model.insertMany([objData]);
+      let response = await Model.insertMany([{
+        NombreEvaluacion: objData.Evaluacion.label,
+        IdEvaluacion: objData.Evaluacion.value,
+        IdLider: objData.Lider.value,
+        NombreLider: objData.Lider.label,
+        IdEmpresa: objData.IdEmpresa,
+        TotalColaboradores: objData.ArrayEmpleados?.length
+      }]);
+
+      if (response.length > 0) {
+        let arrayDetalle = [];
+        for (const element of objData.ArrayEmpleados) {
+          let objDetalle = {};
+          objDetalle.NombreEvaluacion = objData.Evaluacion.label;
+          objDetalle.IdAsignacion = objData.Evaluacion.label;
+          objDetalle.IdEvaluacion = objData.Evaluacion.value;
+          objDetalle.IdLider = objData.Lider.value;
+          objDetalle.NombreLider = objData.Lider.label;
+          objDetalle.NumeroDocumentoEmpleado = element.Identificacion;
+          objDetalle.NombreEmpleado = element.label;
+          objDetalle.IdEmpleado = element.value;
+          objDetalle.IdEmpresa = objData.IdEmpresa;
+          objDetalle.NombreUsuarioLogin = objData.usuario.NombreCompleto;
+          objDetalle.IdUsuarioLogin = objData.usuario._id;
+          objDetalle.Estado = false
+          arrayDetalle.push(objDetalle)
+        }
+        await ModelDetalle.insertMany(arrayDetalle)
+      }
 
       //set values
       if (response != null && response.length > 0) {
