@@ -21,7 +21,7 @@ const repo = {
       let query = {"IdEmpresa": new mongo.ObjectID(idEmpresa)};
      
       //find object
-      let response = await Model.find(query).sort('Nombre');
+      let response = await Model.find({}).sort('Nombre');
 
       //set values
       let status, failure_code, failure_message;
