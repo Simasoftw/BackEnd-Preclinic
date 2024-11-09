@@ -2,7 +2,18 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
-const Schema = schema({IdEvaluacion: String,NombreEvaluacion:String, IdLider: String})
+const Schema = schema({
+    NombreEvaluacion:String,
+    IdEvaluacion:String,
+    IdLider:String,
+    NombreLider:String,
+    IdEmpresa:String,
+    TotalColaboradores:String,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+})
     
 
 const asignacionEvaluaciones = mongoose.model('asignacionEvaluaciones', Schema);

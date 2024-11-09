@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
@@ -8,9 +7,12 @@ const Schema = schema({
     tipoEvaluacion: String,
     arrayCompetencias: Array,
     arrayPreguntasLibres: Array,
-    IdEmpresa: String
-})
-    
+    IdEmpresa: String,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
 
 const evaluciones = mongoose.model('evaluciones', Schema);
 module.exports = evaluciones;
