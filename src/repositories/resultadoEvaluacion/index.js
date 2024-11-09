@@ -1,6 +1,6 @@
 
 const constants = require('../../constants');
-const Model = require('../../models/detalleAsignacionEvaluaciones');
+const Model = require('../../models/resultadoEvaluacion');
 const uuidv1 = require('../../../node_modules/uuid/v1');
 const mongo = require('mongodb'); 
 
@@ -18,7 +18,7 @@ const repo = {
   listar: async (idEmpresa) => {
     try {
       //find query
-      let query = {"IdEmpresa": idEmpresa};
+      let query = {"IdEmpresa": new mongo.ObjectID(idEmpresa)};
      
       //find object
       let response = await Model.find(query).sort('Nombre');

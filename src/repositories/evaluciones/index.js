@@ -45,6 +45,54 @@ const repo = {
     }
   },
 
+  listarPorId: async (objParameters) => {
+    try {
+      //find query
+
+      // let query = {
+      //   "IdEmpresa": new mongo.ObjectID(objParameters.value),
+      //   "_id": new mongo.ObjectID(objParameters.key)
+      // };
+
+
+      let query = {
+        'IdEmpresa': new mongo.ObjectID(objParameters.value),
+        '_id': new mongo.ObjectID(objParameters.key)
+      };
+
+      console.log('query --->', query);
+      // query = {};
+
+      //let query = { "Codigo": "001" };
+
+      //find object
+      let response = await Model.find(query);
+
+
+
+      //set values 
+
+      let status, failure_code, failure_message;
+
+      status = constants.SUCCEEDED_MESSAGE;
+
+      //return response
+      return {
+        status: status,
+        datos: response,
+        failure_code: failure_code,
+        failure_message: failure_message,
+      };
+
+    } catch (e2) {
+      return {
+        status: constants.INTERNAL_ERROR_MESSAGE,
+        failure_code: e2.code,
+        failure_message: e2.message,
+      };
+    }
+  },
+
   buscar: async ({ findObject }) => {
     try {
       //find query

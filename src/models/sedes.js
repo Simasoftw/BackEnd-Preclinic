@@ -18,5 +18,5 @@ const Schema = schema({
 })
     
 
-const sedes = mongoose.model('sedes', Schema);
+const sedes = mongoose.model('configuracion_sedes', Schema);
 module.exports = sedes;

@@ -30,7 +30,8 @@ module.exports = () => {
   const regionalesController = require("./controllers/regionales");   
   const preguntasController = require("./controllers/preguntas");   
   const asignacionEvaluacionesController = require("./controllers/asignacionEvaluaciones");  
-  const detalleAsignacionEvaluacionesController = require("./controllers/detalleAsignacionEvaluaciones");   
+  const detalleAsignacionEvaluacionesController = require("./controllers/detalleAsignacionEvaluaciones");
+  const resultadoEvaluacionController = require("./controllers/resultadoEvaluacion")
 
   // Aplica la validación JWT a todas las rutas debajo con authenticateJWT
   router.use('/interfaces', authenticateJWT);
@@ -94,6 +95,7 @@ module.exports = () => {
   requestsRouter.post("/evaluciones/insertar", evalucionesController.insertar);
   requestsRouter.post("/evaluciones/eliminar", evalucionesController.eliminar);
   requestsRouter.post("/evaluciones/actualizar", evalucionesController.actualizar);
+  requestsRouter.get("/evalucionesListarPorId/:value/:key", evalucionesController.listarPorId);
   requestsRouter.post("/evaluciones/consultar", evalucionesController.consultar)
 
   //formularios evaluciones
@@ -127,6 +129,14 @@ module.exports = () => {
   requestsRouter.post("/preguntas/eliminar", preguntasController.eliminar);
   requestsRouter.post("/preguntas/actualizar", preguntasController.actualizar);
   requestsRouter.post("/preguntas/consultar", preguntasController.consultar)
+
+  //resultado evaluacion 
+  requestsRouter.get("/resultadoEvaluacion/listar/:value", resultadoEvaluacionController.listar);
+  requestsRouter.get("/resultadoEvaluacion/:key/:value", resultadoEvaluacionController.buscar);
+  requestsRouter.post("/resultadoEvaluacion/insertar", resultadoEvaluacionController.insertar);
+  requestsRouter.post("/resultadoEvaluacion/eliminar", resultadoEvaluacionController.eliminar);
+  requestsRouter.post("/resultadoEvaluacion/actualizar", resultadoEvaluacionController.actualizar);
+  requestsRouter.post("/resultadoEvaluacion/consultar", resultadoEvaluacionController.consultar)
 
   //usuarios
   requestsRouter.post("/usuarios/listar", usuariosController.listar);

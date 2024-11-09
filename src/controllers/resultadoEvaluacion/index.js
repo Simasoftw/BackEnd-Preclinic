@@ -4,7 +4,6 @@ const buscar = require('./buscar');
 const insertar = require('./insertar');
 const actualizar = require('./actualizar');
 const eliminar = require('./eliminar');
-const listarPorId = require('./listarPorId')
 const consultar = require('./consultar')
 
 module.exports = {
@@ -13,6 +12,5 @@ module.exports = {
   insertar,
   actualizar,
   eliminar,
-  listarPorId,
   consultar
 }
