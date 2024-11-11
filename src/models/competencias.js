@@ -6,6 +6,7 @@ const Schema = schema({
     Codigo: String, 
     Nombre: String, 
     Descripcion: String,
+    Tipo: String,
     IdEmpresa: String
 })
     
