@@ -1,6 +1,7 @@
 
 const constants = require('../../constants');
 const Model = require('../../models/resultadoEvaluacion');
+const ModelDetalleAsig = require('../../models/detalleAsignacionEvaluaciones');
 const uuidv1 = require('../../../node_modules/uuid/v1');
 const mongo = require('mongodb'); 
 
@@ -81,6 +82,9 @@ const repo = {
 
       let status, failure_code, failure_message;
 
+      await ModelDetalleAsig.findOneAndUpdate({_id: new mongo.ObjectID(objData._id)}, {Estado: true}); 
+      delete objData._id 
+      
       //find object
       let response = await Model.insertMany([objData]);
 
