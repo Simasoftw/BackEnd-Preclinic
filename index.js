@@ -1,5 +1,5 @@
 const path = require('path');
-const config = require('./../config');
+const config = require('./config');
 const NODE_ENV = config.env;
 const PORT = config.server.port;
 
@@ -9,11 +9,11 @@ if (NODE_ENV === 'production' || NODE_ENV === 'test' || NODE_ENV === 'dev') {
     require('newrelic');
 }
 
-const mongo = require('./helpers/mongo');
+const mongo = require('./src/helpers/mongo');
 mongo.connect().then((res) => {
     if (res) {
         //Express Server
-        const app = require('./app');
+        const app = require('./src/app');
         app.listen(PORT, () => {
             console.log(`Listening on port ${PORT} running ${NODE_ENV} environment`);
 
