@@ -2,8 +2,11 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
-const Schema = schema({codigo: String, nombre: String, descripcion: String})
+const Schema = schema({
+    Nombre: String,
+    Codigo: String
+})
     
 
-const cargos = mongoose.model('cargos', Schema);
+const cargos = mongoose.model('recursoshumanos_cargos', Schema);
 module.exports = cargos;

@@ -1,5 +1,5 @@
 
-const repository = require('../../repositories/preguntas');
+const repository = require('../../repositories/resultadoEvaluacion');
 const constants = require('../../constants');
 
 async function handler(req, res, next) {
