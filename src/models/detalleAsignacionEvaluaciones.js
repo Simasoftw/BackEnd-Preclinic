@@ -15,6 +15,8 @@ const Schema = schema({
     NombreUsuarioLogin: String,
     IdUsuarioLogin: String,
     Estado: Boolean,
+    CargoEmpleado: Object,
+    AreaServicioEmpleado: Object,
     createdAt: {
         type: Date,
         default: Date.now

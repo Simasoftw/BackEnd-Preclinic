@@ -12,7 +12,11 @@ const Schema = schema({
     descripcion: String,
     fecha: String,
     area:String,
-    Sede:String
+    Sede:String,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 })
     
 
