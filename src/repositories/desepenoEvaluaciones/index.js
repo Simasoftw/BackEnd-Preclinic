@@ -28,39 +28,39 @@ const repo = {
               $switch: {
                 branches: [
                   {
-                    case: { $gte: ["$promedioTotal", 100] },
+                    case: { $gte: ["$promedioGeneralPorcentaje", 100] },
                     then: "ALTO RENDIMIENTO - ALTO POTENCIAL"
                   },
                   {
-                    case: { $and: [{ $gte: ["$promedioTotal", 90] }, { $lt: ["$promedioTotal", 100] }] },
+                    case: { $and: [{ $gte: ["$promedioGeneralPorcentaje", 90] }, { $lt: ["$promedioGeneralPorcentaje", 100] }] },
                     then: "RENDIMIENTO MODERADO - ALTO POTENCIAL"
                   },
                   {
-                    case: { $and: [{ $gte: ["$promedioTotal", 85] }, { $lt: ["$promedioTotal", 90] }] },
+                    case: { $and: [{ $gte: ["$promedioGeneralPorcentaje", 85] }, { $lt: ["$promedioGeneralPorcentaje", 90] }] },
                     then: "ALTO RENDIMIENTO - POTENCIAL MODERADO"
                   },
                   {
-                    case: { $and: [{ $gte: ["$promedioTotal", 80] }, { $lt: ["$promedioTotal", 85] }] },
+                    case: { $and: [{ $gte: ["$promedioGeneralPorcentaje", 80] }, { $lt: ["$promedioGeneralPorcentaje", 85] }] },
                     then: "BAJO RENDIMIENTO - ALTO POTENCIAL"
                   },
                   {
-                    case: { $and: [{ $gte: ["$promedioTotal", 75] }, { $lt: ["$promedioTotal", 80] }] },
+                    case: { $and: [{ $gte: ["$promedioGeneralPorcentaje", 75] }, { $lt: ["$promedioGeneralPorcentaje", 80] }] },
                     then: "ALTO RENDIMIENTO - BAJO POTENCIAL"
                   },
                   {
-                    case: { $and: [{ $gte: ["$promedioTotal", 70] }, { $lt: ["$promedioTotal", 75] }] },
+                    case: { $and: [{ $gte: ["$promedioGeneralPorcentaje", 70] }, { $lt: ["$promedioGeneralPorcentaje", 75] }] },
                     then: "RENDIMIENTO MODERADO - POTENCIAL MODERADO"
                   },
                   {
-                    case: { $and: [{ $gte: ["$promedioTotal", 60] }, { $lt: ["$promedioTotal", 70] }] },
+                    case: { $and: [{ $gte: ["$promedioGeneralPorcentaje", 60] }, { $lt: ["$promedioGeneralPorcentaje", 70] }] },
                     then: "BAJO RENDIMIENTO - POTENCIAL MODERADO"
                   },
                   {
-                    case: { $and: [{ $gte: ["$promedioTotal", 55] }, { $lt: ["$promedioTotal", 60] }] },
+                    case: { $and: [{ $gte: ["$promedioGeneralPorcentaje", 55] }, { $lt: ["$promedioGeneralPorcentaje", 60] }] },
                     then: "RENDIMIENTO MODERADO - BAJO POTENCIAL"
                   },
                   {
-                    case: { $lt: ["$promedioTotal", 55] },
+                    case: { $lt: ["$promedioGeneralPorcentaje", 55] },
                     then: "BAJO RENDIMIENTO - BAJO POTENCIAL"
                   }
                 ],
@@ -154,12 +154,17 @@ const repo = {
   buscar: async ({ findObject }) => {
     try {
       //find query
-      let query = {};
-      query[findObject.key] = findObject.value;
-
+      let query = findObject.value;
+      let key = findObject.key;
+      // query[findObject.key] = findObject.value;
       //find object
-      let response = await Model.find(query).sort('Nombre');
-
+      let response = await objModel.find({
+        $or: [
+          { [key]: { $regex: query, $options: 'i' } }, // Búsqueda dinámica por clave
+          { Referencia: { $regex: query, $options: 'i' } },
+          { Descripcion: { $regex: query, $options: 'i' } } // Búsqueda por el campo PrimerNombre
+        ]
+      }).populate('Empresa');
       //set values
       let status, failure_code, failure_message;
 
