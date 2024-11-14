@@ -97,6 +97,8 @@ module.exports = () => {
   requestsRouter.post("/evaluciones/actualizar", evalucionesController.actualizar);
   requestsRouter.get("/evalucionesListarPorId/:value/:key", evalucionesController.listarPorId);
   requestsRouter.post("/evaluciones/consultar", evalucionesController.consultar)
+  
+
 
   //formularios evaluciones
   requestsRouter.get("/formularios_evaluciones/listar/:value", formularios_evalucionesController.listar);
@@ -164,7 +166,7 @@ module.exports = () => {
   requestsRouter.post("/detalleAsignacionEvaluaciones/eliminar", detalleAsignacionEvaluacionesController.eliminar);
   requestsRouter.post("/detalleAsignacionEvaluaciones/actualizar", detalleAsignacionEvaluacionesController.actualizar);
   requestsRouter.post("/detalleAsignacionEvaluaciones/consultar", detalleAsignacionEvaluacionesController.consultar)
-
+  requestsRouter.post("/detalleAsignacionEvaluaciones/filter", detalleAsignacionEvaluacionesController.filter)
   //interfaces
   requestsRouter.get("/interfaces/", interfacesController.buscar);
 
