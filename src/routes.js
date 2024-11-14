@@ -31,7 +31,8 @@ module.exports = () => {
   const preguntasController = require("./controllers/preguntas");   
   const asignacionEvaluacionesController = require("./controllers/asignacionEvaluaciones");  
   const detalleAsignacionEvaluacionesController = require("./controllers/detalleAsignacionEvaluaciones");
-  const resultadoEvaluacionController = require("./controllers/resultadoEvaluacion")
+  const resultadoEvaluacionController = require("./controllers/resultadoEvaluacion");
+  const desempenoController = require("./controllers/desepenoEvaluaciones")
 
   // Aplica la validación JWT a todas las rutas debajo con authenticateJWT
   router.use('/interfaces', authenticateJWT);
@@ -176,6 +177,9 @@ module.exports = () => {
   requestsRouter.post("/roles/eliminar", rolesController.eliminar);
   requestsRouter.post("/roles/actualizar", rolesController.actualizar);
   requestsRouter.post("/roles/consultar", rolesController.consultar);
+  
+  // desempeño evaluaciones
+  requestsRouter.get("/desepeno/listar/:value", desempenoController.listar);
 
   //estado Empresas
   // requestsRouter.get(
