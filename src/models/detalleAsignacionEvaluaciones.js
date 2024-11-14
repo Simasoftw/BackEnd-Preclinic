@@ -17,6 +17,7 @@ const Schema = schema({
     Estado: Boolean,
     CargoEmpleado: Object,
     AreaServicioEmpleado: Object,
+    resultadoInfo: Object,
     createdAt: {
         type: Date,
         default: Date.now

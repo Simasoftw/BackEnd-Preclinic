@@ -17,33 +17,60 @@ const repo = {
 
   listar: async (idEmpresa) => {
     try {
-      //find query
-      let query = {"IdEmpresa": idEmpresa};
-     
-      //find object
-      let response = await Model.find(query).sort('Nombre');
-
-      //set values
-      let status, failure_code, failure_message;
-
-      status = constants.SUCCEEDED_MESSAGE;
-
-      //return response
+      // Construir query para IdEmpresa
+      let query = { "IdEmpresa": idEmpresa };
+  
+      let response = await Model.aggregate([
+        { $match: query },  
+        {
+          $lookup: {
+            from: "resultadoevaluaciones",  
+            localField: "NumeroDocumentoEmpleado",  
+            foreignField: "NumeroDocumentoEmpleado",  
+            as: "resultadoInfo"  
+          }
+        },
+        {
+          $unwind: {
+            path: "$resultadoInfo",  
+            preserveNullAndEmptyArrays: true  
+          }
+        },
+        {
+          $addFields: {
+            promedioGeneralPorcentaje: {
+              $ifNull: ["$resultadoInfo.promedioGeneralPorcentaje", null] 
+            },
+            createdAt: {
+              $ifNull: ["$resultadoInfo.createdAt", null]  // Traer el campo createdAt de resultadoevaluaciones
+            }
+          }
+        },
+        { $sort: { Nombre: 1 } }  // Ordenar por Nombre
+      ]);
+  
+      // Configurar los valores de respuesta
+      let status = constants.SUCCEEDED_MESSAGE;
+  
+      // Retornar la respuesta
       return {
         status: status,
         datos: response,
-        failure_code: failure_code,
-        failure_message: failure_message,
+        failure_code: null,
+        failure_message: null,
       };
-
-    } catch (e2) {
+  
+    } catch (error) {
       return {
         status: constants.INTERNAL_ERROR_MESSAGE,
-        failure_code: e2.code,
-        failure_message: e2.message,
+        failure_code: error.code,
+        failure_message: error.message,
       };
     }
   },
+  
+  
+  
 
   buscar: async ({ findObject }) => {
     try {
@@ -212,6 +239,49 @@ const repo = {
             failure_code: e2.code,
             failure_message: e2.message
         };
+    }
+  },
+
+  filter: async (filtros = {}) => {
+    try {
+      let query = { "IdEmpresa": filtros.idEmpresa };
+  
+      if (filtros.CargoEmpleado) {
+        query.CargoEmpleado = filtros.CargoEmpleado;
+      }
+      if (filtros.AreaServicioEmpleado) {
+        query.AreaServicioEmpleado = filtros.AreaServicioEmpleado;
+      }
+      if (filtros.Estado !== undefined) {
+        query.Estado = filtros.Estado;
+      }
+  
+      // Ejecutamos la consulta
+      let responseQuery = Model.find(query).sort('Nombre');
+  
+      // Realizamos populate en la colección `resultadoevaluaciones` si `Estado` es `true`
+      if (filtros.Estado === true) {
+        responseQuery = responseQuery.populate({
+          path: 'resultadoevaluaciones',
+          select: 'promedioGeneralPorcentaje'
+        });
+      }
+  
+      const response = await responseQuery;
+  
+      // Configuramos los valores de retorno
+      return {
+        status: constants.SUCCEEDED_MESSAGE,
+        datos: response,
+        failure_code: null,
+        failure_message: null,
+      };
+    } catch (e2) {
+      return {
+        status: constants.INTERNAL_ERROR_MESSAGE,
+        failure_code: e2.code,
+        failure_message: e2.message,
+      };
     }
   },
 
