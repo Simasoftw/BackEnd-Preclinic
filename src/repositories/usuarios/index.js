@@ -231,7 +231,9 @@ const repo = {
         Departamento: 1,
         Dv: 1,
         CodigoTipoIdentificacion: 1,
-        Clave: 1
+        RolEvaluacion: 1,
+        IdRolEvaluacion: 1,
+        IdLider: 1,
       }).populate('IdRol');
 
       let token = null; 

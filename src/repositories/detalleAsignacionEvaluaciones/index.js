@@ -244,7 +244,7 @@ const repo = {
 
   filter: async (filtros = {}) => {
     try {
-      let query = { "IdEmpresa": filtros.idEmpresa };
+      let query = { "IdEmpresa": filtros.IdEmpresa };
   
       if (filtros.CargoEmpleado) {
         query.CargoEmpleado = filtros.CargoEmpleado;
@@ -254,6 +254,10 @@ const repo = {
       }
       if (filtros.Estado !== undefined) {
         query.Estado = filtros.Estado;
+      }
+
+      if (filtros.IdLider) {
+        query.IdLider = filtros.IdLider;
       }
   
       // Ejecutamos la consulta

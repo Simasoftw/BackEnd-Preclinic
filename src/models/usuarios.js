@@ -36,6 +36,9 @@ const usuariosSchema = schema({
     CodigoSede: String,
     EstadoCambioClave: Boolean,
     CarqueAutomatico: Boolean,
+    RolEvaluacion: String,
+    IdRolEvaluacion: String,
+    IdLider: String
 });
 
 const usuarios = mongoose.model('usuarios', usuariosSchema);
