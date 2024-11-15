@@ -21,6 +21,16 @@ const Schema = schema({
     Sede:String,
     promedioGeneral: String,
     promedioGeneralPorcentaje: String,
+    Aceptacion:  Boolean,
+    FechaAceptacion:  Boolean, 
+    Justificacion: String, 
+    FechaRespuesta: {
+        type: Date,
+        default: function () {
+            // Solo asigna la fecha si isActive es true
+            return [false,true].includes(this.Aceptacion) ? Date.now() : null;
+        },
+    },
     createdAt: {
         type: Date,
         default: Date.now

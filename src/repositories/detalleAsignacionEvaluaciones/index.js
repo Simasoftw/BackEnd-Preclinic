@@ -252,26 +252,48 @@ const repo = {
       if (filtros.AreaServicioEmpleado) {
         query.AreaServicioEmpleado = filtros.AreaServicioEmpleado;
       }
-      if (filtros.Estado !== undefined) {
+      if ([false, true].includes(filtros.Estado)) {
         query.Estado = filtros.Estado;
       }
 
       if (filtros.IdLider) {
         query.IdLider = filtros.IdLider;
-      }
-  
-      // Ejecutamos la consulta
-      let responseQuery = Model.find(query).sort('Nombre');
-  
-      // Realizamos populate en la colección `resultadoevaluaciones` si `Estado` es `true`
-      if (filtros.Estado === true) {
-        responseQuery = responseQuery.populate({
-          path: 'resultadoevaluaciones',
-          select: 'promedioGeneralPorcentaje'
-        });
-      }
-  
-      const response = await responseQuery;
+      } 
+
+      if (filtros.NumeroDocumentoEmpleado) {
+        query.NumeroDocumentoEmpleado = filtros.NumeroDocumentoEmpleado;
+      } 
+      
+      
+      // Ejecutamos la consulta  
+      const response = await Model.aggregate([
+        { $match: query },  
+        {
+          $lookup: {
+            from: "resultadoevaluaciones",  
+            localField: "NumeroDocumentoEmpleado",  
+            foreignField: "NumeroDocumentoEmpleado",  
+            as: "resultadoInfo"  
+          }
+        },
+        {
+          $unwind: {
+            path: "$resultadoInfo",  
+            preserveNullAndEmptyArrays: true  
+          }
+        },
+        {
+          $addFields: {
+            promedioGeneralPorcentaje: {
+              $ifNull: ["$resultadoInfo.promedioGeneralPorcentaje", null] 
+            },
+            createdAt: {
+              $ifNull: ["$resultadoInfo.createdAt", null]  // Traer el campo createdAt de resultadoevaluaciones
+            }
+          }
+        },
+        { $sort: { Nombre: 1 } }  // Ordenar por Nombre
+      ]);;
   
       // Configuramos los valores de retorno
       return {
