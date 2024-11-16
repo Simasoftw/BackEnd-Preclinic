@@ -29,39 +29,39 @@ const repo = {
                 branches: [
                   {
                     case: { $gte: ["$promedioGeneralPorcentaje", 100] },
-                    then: {nombre : "ALTO RENDIMIENTO - ALTO POTENCIAL", rango: "100%"}
+                    then: {codigo: "P09", nombre : "ALTO RENDIMIENTO - ALTO POTENCIAL", rango: "100%"}
                   },
                   {
                     case: { $and: [{ $gte: ["$promedioGeneralPorcentaje", 90] }, { $lt: ["$promedioGeneralPorcentaje", 100] }] },
-                    then: {nombre : "RENDIMIENTO MODERADO - ALTO POTENCIAL", rango: "90%"}
+                    then: {codigo: "P08", nombre : "RENDIMIENTO MODERADO - ALTO POTENCIAL", rango: "90%"}
                   },
                   {
                     case: { $and: [{ $gte: ["$promedioGeneralPorcentaje", 85] }, { $lt: ["$promedioGeneralPorcentaje", 90] }] },
-                    then: {nombre: "ALTO RENDIMIENTO - POTENCIAL MODERADO", rango: "85%"}
+                    then: {codigo: "P07", nombre: "ALTO RENDIMIENTO - POTENCIAL MODERADO", rango: "85%"}
                   },
                   {
                     case: { $and: [{ $gte: ["$promedioGeneralPorcentaje", 80] }, { $lt: ["$promedioGeneralPorcentaje", 85] }] },
-                    then: {nombre :"BAJO RENDIMIENTO - ALTO POTENCIAL", rango: "80%"}
+                    then: {codigo: "P06", nombre :"BAJO RENDIMIENTO - ALTO POTENCIAL", rango: "80%"}
                   },
                   {
                     case: { $and: [{ $gte: ["$promedioGeneralPorcentaje", 75] }, { $lt: ["$promedioGeneralPorcentaje", 80] }] },
-                    then: {nombre: "ALTO RENDIMIENTO - BAJO POTENCIAL", rango: "75%"}
+                    then: {codigo: "P05", nombre: "ALTO RENDIMIENTO - BAJO POTENCIAL", rango: "75%"}
                   },
                   {
                     case: { $and: [{ $gte: ["$promedioGeneralPorcentaje", 70] }, { $lt: ["$promedioGeneralPorcentaje", 75] }] },
-                    then: {nombre: "RENDIMIENTO MODERADO - POTENCIAL MODERADO", rango: "70%"}
+                    then: {codigo: "P04", nombre: "RENDIMIENTO MODERADO - POTENCIAL MODERADO", rango: "70%"}
                   },
                   {
                     case: { $and: [{ $gte: ["$promedioGeneralPorcentaje", 60] }, { $lt: ["$promedioGeneralPorcentaje", 70] }] },
-                    then: {nombre: "BAJO RENDIMIENTO - POTENCIAL MODERADO", rango: "60%"}
+                    then: {codigo: "P03", nombre: "BAJO RENDIMIENTO - POTENCIAL MODERADO", rango: "60%"}
                   },
                   {
                     case: { $and: [{ $gte: ["$promedioGeneralPorcentaje", 55] }, { $lt: ["$promedioGeneralPorcentaje", 60] }] },
-                    then: {nombre : "RENDIMIENTO MODERADO - BAJO POTENCIAL", rango: "55%"}
+                    then: {codigo: "P02", nombre : "RENDIMIENTO MODERADO - BAJO POTENCIAL", rango: "55%"}
                   },
                   {
                     case: { $lt: ["$promedioGeneralPorcentaje", 55] },
-                    then: {nombre:"BAJO RENDIMIENTO - BAJO POTENCIAL", rango: "<55%"}
+                    then: {codigo: "P01", nombre:"BAJO RENDIMIENTO - BAJO POTENCIAL", rango: "<55%"}
                   }
                 ],
                 default: "NO CLASIFICADO"
