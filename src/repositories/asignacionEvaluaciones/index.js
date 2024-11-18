@@ -93,8 +93,7 @@ const repo = {
         .padStart(2, "0")}:${dt.getMinutes().toString().padStart(2, "0")}:${dt
         .getSeconds()
         .toString()
-        .padStart(3, "0")}Z`;
-        console.log("fechaActual--->", new Date(fechaActual));
+        .padStart(3, "0")}Z`; 
         
       //find object
       let response = await Model.insertMany([{
