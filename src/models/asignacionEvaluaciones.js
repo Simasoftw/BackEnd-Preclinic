@@ -9,10 +9,7 @@ const Schema = schema({
     NombreLider:String,
     IdEmpresa:String,
     TotalColaboradores:String,
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
+    createdAt: Date 
 })
     
 

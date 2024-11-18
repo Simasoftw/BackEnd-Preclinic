@@ -81,7 +81,17 @@ const repo = {
     try {
 
       let status, failure_code, failure_message;
-
+      var dt = new Date();
+      objData.createdAt = `${(dt.getMonth() + 1).toString().padStart(2, "0")}/${dt
+        .getDate()
+        .toString()
+        .padStart(2, "0")}/${dt.getFullYear().toString().padStart(4, "0")} ${dt
+        .getHours()
+        .toString()
+        .padStart(2, "0")}:${dt.getMinutes().toString().padStart(2, "0")}:${dt
+        .getSeconds()
+        .toString()
+        .padStart(3, "0")}Z`; 
       await ModelDetalleAsig.findOneAndUpdate({_id: new mongo.ObjectID(objData._id)}, {Estado: true}); 
       delete objData._id 
       
@@ -118,6 +128,18 @@ const repo = {
     try {
       const objFiltro = { _id: objData._id };
   
+      var dt = new Date();
+      objData.FechaRespuesta = `${(dt.getMonth() + 1).toString().padStart(2, "0")}/${dt
+        .getDate()
+        .toString()
+        .padStart(2, "0")}/${dt.getFullYear().toString().padStart(4, "0")} ${dt
+        .getHours()
+        .toString()
+        .padStart(2, "0")}:${dt.getMinutes().toString().padStart(2, "0")}:${dt
+        .getSeconds()
+        .toString()
+        .padStart(3, "0")}Z`;
+        
       const response = await Model.findOneAndUpdate(objFiltro, objData, { new: true }); 
   
       // Set status

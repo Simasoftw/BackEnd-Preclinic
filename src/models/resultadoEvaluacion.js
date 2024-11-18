@@ -25,17 +25,8 @@ const Schema = schema({
     FechaAceptacion:  Boolean, 
     Justificacion: String, 
     IdAsignacion: String,
-    FechaRespuesta: {
-        type: Date,
-        default: function () {
-            // Solo asigna la fecha si isActive es true
-            return [false,true].includes(this.Aceptacion) ? Date.now() : null;
-        },
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
+    FechaRespuesta:  Date,
+    createdAt: Date
 })
     
 

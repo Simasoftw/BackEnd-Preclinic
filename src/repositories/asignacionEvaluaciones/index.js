@@ -82,7 +82,20 @@ const repo = {
     try {
 
       let status, failure_code, failure_message;
-    
+
+      var dt = new Date();
+      var fechaActual = `${(dt.getMonth() + 1).toString().padStart(2, "0")}/${dt
+        .getDate()
+        .toString()
+        .padStart(2, "0")}/${dt.getFullYear().toString().padStart(4, "0")} ${dt
+        .getHours()
+        .toString()
+        .padStart(2, "0")}:${dt.getMinutes().toString().padStart(2, "0")}:${dt
+        .getSeconds()
+        .toString()
+        .padStart(3, "0")}Z`;
+        console.log("fechaActual--->", new Date(fechaActual));
+        
       //find object
       let response = await Model.insertMany([{
         NombreEvaluacion: objData.Evaluacion.label,
@@ -90,9 +103,10 @@ const repo = {
         IdLider: objData.Lider.value,
         NombreLider: objData.Lider.label,
         IdEmpresa: objData.IdEmpresa,
-        TotalColaboradores: objData.ArrayEmpleados?.length
+        TotalColaboradores: objData.ArrayEmpleados?.length,
+        createdAt: fechaActual
       }]);
-
+      
       if (response.length > 0) {
         let arrayDetalle = [];
         for (const element of objData.ArrayEmpleados) {
@@ -110,6 +124,7 @@ const repo = {
           objDetalle.IdEmpresa = objData.IdEmpresa;
           objDetalle.NombreUsuarioLogin = objData.usuario.NombreCompleto;
           objDetalle.IdUsuarioLogin = objData.usuario._id;
+          objDetalle.createdAt = fechaActual;
           objDetalle.Estado = false
           arrayDetalle.push(objDetalle)
         }
