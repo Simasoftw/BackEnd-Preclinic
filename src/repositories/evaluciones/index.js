@@ -60,7 +60,6 @@ const repo = {
         '_id': new mongo.ObjectID(objParameters.key)
       };
 
-      console.log('query --->', query);
       // query = {};
 
       //let query = { "Codigo": "001" };

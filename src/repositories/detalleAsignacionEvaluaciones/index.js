@@ -24,12 +24,23 @@ const repo = {
         { $match: query },  
         {
           $lookup: {
-            from: "resultadoevaluaciones",  
-            localField: "NumeroDocumentoEmpleado",  
-            foreignField: "NumeroDocumentoEmpleado",  
-            as: "resultadoInfo"  
+            from: "resultadoevaluaciones",
+            let: { localNumeroDocumento: "$NumeroDocumentoEmpleado", localIdAsignacion: { $toString: "$_id" } },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $and: [
+                      { $eq: ["$NumeroDocumentoEmpleado", "$$localNumeroDocumento"] },
+                      { $eq: ["$IdAsignacion", "$$localIdAsignacion" ] }
+                    ]
+                  }
+                }
+              }
+            ],
+            as: "resultadoInfo"
           }
-        },
+        },           
         {
           $unwind: {
             path: "$resultadoInfo",  
@@ -270,12 +281,23 @@ const repo = {
         { $match: query },  
         {
           $lookup: {
-            from: "resultadoevaluaciones",  
-            localField: "NumeroDocumentoEmpleado",  
-            foreignField: "NumeroDocumentoEmpleado",  
-            as: "resultadoInfo"  
+            from: "resultadoevaluaciones",
+            let: { localNumeroDocumento: "$NumeroDocumentoEmpleado", localIdAsignacion: { $toString: "$_id" } },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $and: [
+                      { $eq: ["$NumeroDocumentoEmpleado", "$$localNumeroDocumento"] },
+                      { $eq: ["$IdAsignacion", "$$localIdAsignacion" ] }
+                    ]
+                  }
+                }
+              }
+            ],
+            as: "resultadoInfo"
           }
-        },
+        },    
         {
           $unwind: {
             path: "$resultadoInfo",  

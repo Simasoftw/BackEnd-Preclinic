@@ -24,6 +24,7 @@ const Schema = schema({
     Aceptacion:  Boolean,
     FechaAceptacion:  Boolean, 
     Justificacion: String, 
+    IdAsignacion: String,
     FechaRespuesta: {
         type: Date,
         default: function () {
