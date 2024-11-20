@@ -5,6 +5,8 @@ const usuariosSchema = schema({
     Id: String,
     IdEmpresa: { type: schema.Types.ObjectId, ref: 'empresas' },
     NumeroIdentificacion: String,
+    Identificacion: String,
+    RolNombre: String,
     UrlResultado: String,
     IdRelacional: String,
     Fecha: Date,

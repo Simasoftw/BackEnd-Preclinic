@@ -258,10 +258,10 @@ const repo = {
       let query = { "IdEmpresa": filtros.IdEmpresa };
   
       if (filtros.CargoEmpleado) {
-        query.CargoEmpleado = filtros.CargoEmpleado;
+        query['CargoEmpleado.value']= filtros.CargoEmpleado;
       }
       if (filtros.AreaServicioEmpleado) {
-        query.AreaServicioEmpleado = filtros.AreaServicioEmpleado;
+        query['AreaServicioEmpleado.value'] = filtros.AreaServicioEmpleado;
       }
       if ([false, true].includes(filtros.Estado)) {
         query.Estado = filtros.Estado;
@@ -274,7 +274,7 @@ const repo = {
       if (filtros.NumeroDocumentoEmpleado) {
         query.NumeroDocumentoEmpleado = filtros.NumeroDocumentoEmpleado;
       } 
-      
+       
       
       // Ejecutamos la consulta  
       const response = await Model.aggregate([

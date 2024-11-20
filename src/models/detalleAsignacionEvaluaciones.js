@@ -18,6 +18,7 @@ const Schema = schema({
     CargoEmpleado: Object,
     AreaServicioEmpleado: Object,
     resultadoInfo: Object,
+    SedeEmpleado: Object,
     createdAt: Date
 })
     
