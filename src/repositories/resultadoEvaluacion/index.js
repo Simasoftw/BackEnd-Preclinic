@@ -4,6 +4,7 @@ const Model = require('../../models/resultadoEvaluacion');
 const ModelDetalleAsig = require('../../models/detalleAsignacionEvaluaciones');
 const uuidv1 = require('../../../node_modules/uuid/v1');
 const mongo = require('mongodb'); 
+const axios = require('axios');
 
 const v1options = {
   node: [0x01, 0x23, 0x45, 0x67, 0x89, 0xab],
@@ -240,5 +241,42 @@ const repo = {
         };
     }
   },
+
+  subirEvidencia: async (body) => {
+    try {
+
+        //find query 
+        
+        const urlBase = 'http://apiinterfazarchivos-prod.us-west-2.elasticbeanstalk.com/api/Archivos/Guardar' 
+        const response = await axios.post(urlBase, JSON.stringify(body), {
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+            Accept: "application/json",
+          },
+        }); 
+        
+
+        //set values
+        let status, failure_code, failure_message;
+
+        status = constants.SUCCEEDED_MESSAGE;
+
+        //return response
+        return {
+          status: status,
+          datos: response,
+          failure_code: failure_code,
+          failure_message: failure_message,
+        };
+
+    } catch (e2) {
+        return {
+            status: constants.INTERNAL_ERROR_MESSAGE,
+            failure_code: e2.code,
+            failure_message: e2.message
+        };
+    }
+  },
+
 
 }; module.exports = repo;

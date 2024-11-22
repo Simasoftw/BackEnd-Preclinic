@@ -140,6 +140,7 @@ module.exports = () => {
   requestsRouter.post("/resultadoEvaluacion/eliminar", resultadoEvaluacionController.eliminar);
   requestsRouter.post("/resultadoEvaluacion/actualizar", resultadoEvaluacionController.actualizar);
   requestsRouter.post("/resultadoEvaluacion/consultar", resultadoEvaluacionController.consultar)
+  requestsRouter.post("/resultadoEvaluacion/subirEvidencia", resultadoEvaluacionController.subirEvidencia)
 
   //usuarios
   requestsRouter.post("/usuarios/listar", usuariosController.listar);

@@ -26,7 +26,8 @@ const Schema = schema({
     Justificacion: String, 
     IdAsignacion: String,
     FechaRespuesta:  Date,
-    createdAt: Date
+    createdAt: Date,
+    RespuestaLider: String
 })
     
 
