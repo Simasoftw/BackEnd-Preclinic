@@ -27,7 +27,8 @@ const Schema = schema({
     IdAsignacion: String,
     FechaRespuesta:  Date,
     createdAt: Date,
-    RespuestaLider: String
+    RespuestaLider: String,
+    SedeEmpleado: Object
 })
     
 
