@@ -151,6 +151,7 @@ module.exports = () => {
   requestsRouter.post("/usuarios/validarIngreso",usuariosController.validarIngreso);
   requestsRouter.get("/usuarios/listarPorIdentificacion/:value/:key",usuariosController.listarPorIdentificacion);
   requestsRouter.post("/usuarios/consultar", usuariosController.consultar);
+  requestsRouter.post("/usuarios/cambiarClave", usuariosController.cambiarClave);
   requestsRouter.get("/usuarios/listarPacientePorId/:value/:key",usuariosController.listarPacientePorId);
  
   //asignacion Evaluaciones

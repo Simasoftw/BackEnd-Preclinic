@@ -8,6 +8,7 @@ const listarPorIdentificacion = require('./listarPorIdentificacion');
 const consultar = require('./consultar');
 const validarCelular = require('./validarCelular');
 const listarPacientePorId = require('./listarPacientePorId')
+const cambiarClave = require('./cambiarClave')
 
 module.exports = {
   listar,
@@ -19,5 +20,6 @@ module.exports = {
   listarPorIdentificacion,
   consultar,
   validarCelular,
-  listarPacientePorId
+  listarPacientePorId,
+  cambiarClave
 }

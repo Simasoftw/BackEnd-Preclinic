@@ -169,6 +169,49 @@ const repo = {
     }
   },
 
+  cambiarClave: async (objData) => {
+    try {
+
+      let status, failure_code, failure_message;
+ 
+
+      let objFiltro = { _id: new mongo.ObjectID(objData._id), Clave: objData.old };
+
+      response = await objModel.find(objFiltro) // { new: true } para que retorne la data actualizada 
+
+      if (response.length > 0) {
+        response = await objModel.findOneAndUpdate(objFiltro, { Clave: objData.nuevaConfirmacion }, { new: true }) // { new: true } para que retorne la data actualizada 
+
+      } 
+      
+      //find object
+
+      //set values
+      if (response != null && response.length > 0) {
+        //Set status
+        status = constants.SUCCEEDED_MESSAGE;
+      } else {
+        //Set status
+        status = constants.SUCCEEDED_MESSAGE;
+      }
+
+      //return response
+      return {
+        status: status,
+        datos: response,
+        failure_code: failure_code,
+        failure_message: failure_message,
+      };
+
+    } catch (e2) {
+      return {
+        status: constants.INTERNAL_ERROR_MESSAGE,
+        failure_code: e2.code,
+        failure_message: e2.message,
+      };
+    }
+  },
+
   eliminar: async (objdata) => {
     try {
 
@@ -204,14 +247,15 @@ const repo = {
       };
     }
   },
- 
+
 
   validarIngreso: async (findObject) => {
     try {
 
       let mensaje = "";
       let query = new Object({
-        Usuario: findObject.Login
+        Usuario: findObject.Login,
+        Clave: findObject.Clave,
       });
       let status, failure_code, failure_message;
 
@@ -236,12 +280,12 @@ const repo = {
         IdLider: 1,
       }).populate('IdRol');
 
-      let token = null; 
-      
+      let token = null;
+
       if (response.length > 0) {
 
         // const validPassword = await bcrypt.compare(findObject.Clave, response[0].Clave);
-        const validPassword  = true
+        const validPassword = true
 
         if (!validPassword) {
           mensaje = "Password incorrecto"
