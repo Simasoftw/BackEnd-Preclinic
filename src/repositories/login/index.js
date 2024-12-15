@@ -16,7 +16,6 @@ const resp = {
           
           let response = await objModel.find(query);
           
-          console.log("Object",response)
             let status, failure_code, failure_message;
             status = constants.SUCCEEDED_MESSAGE;
 
@@ -35,7 +34,7 @@ const resp = {
     insertar: async (objData) => {
         try {
           let status, failure_code, failure_message;
-          console.log(objData);
+          
           //find object
           let response = await objModel.insertMany(objData);
     

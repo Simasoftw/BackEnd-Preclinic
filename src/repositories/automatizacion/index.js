@@ -38,7 +38,6 @@ const repo = {
             if (err) {
               return console.error(`Error al crear el archivo: ${err.message}`);
             }
-            console.log('Archivo .js creado exitosamente');
           });
         }  
       }); 
@@ -69,7 +68,6 @@ const repo = {
         if (err) {
           return console.error(`Error al crear el archivo: ${err.message}`);
         }
-        console.log('Archivo .js creado exitosamente');
       });  
 
       //set values

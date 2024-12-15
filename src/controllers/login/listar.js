@@ -31,12 +31,8 @@ async function handler(req, res, next) {
       token = jwt.sign({response}, "Stack", {
         expiresIn: "2m"
       });
-      console.log(token);  // Para verificar que se generó el token correctamente
-    } else {
-      console.log('response.datos está vacío o no existe');
-    }
+    }  
 
-    console.log("token2", token)
 
     // Response Object
     let oResponse = {

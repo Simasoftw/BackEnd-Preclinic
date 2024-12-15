@@ -256,6 +256,7 @@ const repo = {
   filter: async (filtros = {}) => {
     try {
       let query = { "IdEmpresa": filtros.IdEmpresa };
+      let query2 = { };
   
       if (filtros.CargoEmpleado) {
         query['CargoEmpleado.value'] = filtros.CargoEmpleado;
@@ -266,18 +267,23 @@ const repo = {
       if ([false, true].includes(filtros.Estado)) {
         query.Estado = filtros.Estado;
       }
+ 
 
-      if (filtros.IdLider) {
-        query.IdLider = filtros.IdLider;
+      if (filtros.NumeroDocumentoEmpleado || filtros.IdLider) {
+        query2 = {
+          $or: [
+            { IdLider: filtros.IdLider },
+            {NumeroDocumentoEmpleado: filtros.NumeroDocumentoEmpleado}
+          ]
+        };
       } 
 
-      if (filtros.NumeroDocumentoEmpleado) {
-        query.NumeroDocumentoEmpleado = filtros.NumeroDocumentoEmpleado;
-      } 
+      
       
       // Ejecutamos la consulta  
       const response = await Model.aggregate([
         { $match: query },  
+        { $match: query2 },  
         {
           $lookup: {
             from: "resultadoevaluaciones",

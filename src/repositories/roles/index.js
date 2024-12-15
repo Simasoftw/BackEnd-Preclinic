@@ -142,7 +142,6 @@ const repo = {
       let objFiltro = { _id: objRol._id };
   
       let usuariosConRol = await objModel.find({ IdRol: objRol._id });
-      console.log("usuer con rol",usuariosConRol);
       
 
       if (usuariosConRol.length>0) {

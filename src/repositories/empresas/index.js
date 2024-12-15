@@ -108,7 +108,6 @@ const repo = {
 
   actualizar: async (objData) => {
     let status, failure_code, failure_message, sMensaje, objRespuesta, bError;
-    console.log(objData);
 
     try {
       let objFiltro = { _id: objData._id };
@@ -228,7 +227,6 @@ const repo = {
         obj.IdEmpresa = objValidacion[0]._id
         response = [obj]
       } else {
-        console.log("");
         response = await objModel.insertMany([objData]);
         objRol = await objModelRoles.find({ Codigo: "9999" })
         objRol = objRol[0]
