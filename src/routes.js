@@ -140,6 +140,7 @@ module.exports = () => {
   requestsRouter.post("/resultadoEvaluacion/eliminar", resultadoEvaluacionController.eliminar);
   requestsRouter.post("/resultadoEvaluacion/actualizar", resultadoEvaluacionController.actualizar);
   requestsRouter.post("/resultadoEvaluacion/consultar", resultadoEvaluacionController.consultar)
+  requestsRouter.get("/resultadosEvaluciones/consultarPowerBI", resultadoEvaluacionController.consultarPowerBI)
   requestsRouter.post("/resultadoEvaluacion/subirEvidencia", resultadoEvaluacionController.subirEvidencia)
 
   //usuarios
@@ -170,6 +171,7 @@ module.exports = () => {
   requestsRouter.post("/detalleAsignacionEvaluaciones/actualizar", detalleAsignacionEvaluacionesController.actualizar);
   requestsRouter.post("/detalleAsignacionEvaluaciones/consultar", detalleAsignacionEvaluacionesController.consultar)
   requestsRouter.post("/detalleAsignacionEvaluaciones/filter", detalleAsignacionEvaluacionesController.filter)
+  requestsRouter.post("/detalleAsignacionEvaluaciones/reset", detalleAsignacionEvaluacionesController.reset)
   //interfaces
   requestsRouter.get("/interfaces/", interfacesController.buscar);
 

@@ -278,5 +278,57 @@ const repo = {
     }
   },
 
+  consultarPowerBI: async ({ }) => {
+    try {
+
+        //find object
+        let response = await Model.aggregate([
+          { $match: {} }, // Etapa para filtrar documentos (en este caso no filtra nada).
+          {
+              $project: {
+                  _id: "$_id",
+                  Lider: "$NombreLider",
+                  Colaborador: "$NombreColaborador",
+                  SedeColaborador: "$SedeEmpleado.label",
+                  AreaColaborador: "$AreaServicioEmpleado.label",
+                  CargoColaborador: "$CargoEmpleado.label",
+                  FechaRegistro: "$fecha",
+                  TipoEvaluacion: "$titulo",
+                  promedioGeneral: "$promedioGeneralPorcentaje",
+                  arrayCompetencias: { competencia: 1,
+                    promedioPorcentaje: 1},
+                  EstadoAceptacion: "$Aceptacion",
+                  FechaRespuestaColaborador: "$FechaAceptacion",
+                  Justificacion: "$Justificacion",
+                  FechaRespuestaLider: "$FechaRespuesta",
+                  RespuestaLider: "$RespuestaLider"
+              }
+          },
+          { $sort: { Colaborador: 1 } } // Ordena por el campo 'Colaborador' en orden ascendente.
+      ]);
+
+
+        //set values
+        let status, failure_code, failure_message;
+
+        status = constants.SUCCEEDED_MESSAGE;
+
+        //return response
+        return {
+          status: status,
+          datos: response,
+          failure_code: failure_code,
+          failure_message: failure_message,
+        };
+
+    } catch (e2) {
+        return {
+            status: constants.INTERNAL_ERROR_MESSAGE,
+            failure_code: e2.code,
+            failure_message: e2.message
+        };
+    }
+  },
+
 
 }; module.exports = repo;

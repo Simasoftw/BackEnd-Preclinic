@@ -6,6 +6,7 @@ const actualizar = require('./actualizar');
 const eliminar = require('./eliminar');
 const consultar = require('./consultar')
 const subirEvidencia = require('./subirEvidencia')
+const consultarPowerBI = require('./consultarPowerBI')
 
 module.exports = {
   listar,
@@ -14,5 +15,6 @@ module.exports = {
   actualizar,
   eliminar,
   consultar,
-  subirEvidencia
+  subirEvidencia,
+  consultarPowerBI
 }

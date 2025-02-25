@@ -1,6 +1,7 @@
 
 const constants = require('../../constants');
 const Model = require('../../models/detalleAsignacionEvaluaciones');
+const ModelResultado = require('../../models/resultadoEvaluacion');
 const uuidv1 = require('../../../node_modules/uuid/v1');
 const mongo = require('mongodb'); 
 
@@ -204,6 +205,37 @@ const repo = {
     }
   },
 
+  reset: async (objData) => {
+    try {
+      let status, failure_code, failure_message;
+  
+      let objFiltro = { _id: objData._id}; 
+      let objFiltro2 = { _id: objData?.resultadoInfo?._id }; 
+      const response = await Model.findOneAndUpdate(objFiltro, { Estado: false }, { new: true }); 
+      await ModelResultado.findOneAndRemove(objFiltro2);
+  
+      if (response) {
+        status = constants.SUCCEEDED_MESSAGE;
+      } else {
+        status = constants.NOT_FOUND_ERROR_MESSAGE;
+      }
+  
+      // Retornar respuesta
+      return {
+        status: status,
+        datos: response ? [response] : [],
+        failure_code: failure_code,
+        failure_message: failure_message,
+      };
+  
+    } catch (e2) {
+      return {
+        status: constants.INTERNAL_ERROR_MESSAGE,
+        failure_code: e2.code,
+        failure_message: e2.message,
+      };
+    }
+  },
 
   consultar: async ({ findObject }) => {
     try {
