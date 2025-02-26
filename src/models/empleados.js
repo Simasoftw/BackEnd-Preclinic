@@ -20,6 +20,9 @@ const Schema = schema({
     ,PersonasACargo: Number
     ,Email: String
     ,IdEmpresa: String
+    ,AreaServicio: Object
+    ,Cargo: Object
+    ,IdEmpresa: String
 })
     
 
