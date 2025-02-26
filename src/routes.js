@@ -33,6 +33,8 @@ module.exports = () => {
   const detalleAsignacionEvaluacionesController = require("./controllers/detalleAsignacionEvaluaciones");
   const resultadoEvaluacionController = require("./controllers/resultadoEvaluacion");
   const desempenoController = require("./controllers/desepenoEvaluaciones")
+  const rangoDesempenoController = require("./controllers/rangoDesempeno");   
+
 
   // Aplica la validación JWT a todas las rutas debajo con authenticateJWT
   router.use('/interfaces', authenticateJWT);
@@ -170,6 +172,15 @@ module.exports = () => {
   requestsRouter.post("/detalleAsignacionEvaluaciones/actualizar", detalleAsignacionEvaluacionesController.actualizar);
   requestsRouter.post("/detalleAsignacionEvaluaciones/consultar", detalleAsignacionEvaluacionesController.consultar)
   requestsRouter.post("/detalleAsignacionEvaluaciones/filter", detalleAsignacionEvaluacionesController.filter)
+
+  //rango de desempeño
+  requestsRouter.get("/rangoDesempeno/listar/:value", rangoDesempenoController.listar);
+  requestsRouter.get("/rangoDesempeno/:key/:value", rangoDesempenoController.buscar);
+  requestsRouter.post("/rangoDesempeno/insertar", rangoDesempenoController.insertar);
+  requestsRouter.post("/rangoDesempeno/eliminar", rangoDesempenoController.eliminar);
+  requestsRouter.post("/rangoDesempeno/actualizar", rangoDesempenoController.actualizar);
+  requestsRouter.post("/rangoDesempeno/consultar", rangoDesempenoController.consultar)
+
   //interfaces
   requestsRouter.get("/interfaces/", interfacesController.buscar);
 
