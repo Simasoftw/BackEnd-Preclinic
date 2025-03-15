@@ -118,7 +118,8 @@ module.exports = () => {
   requestsRouter.post("/empleados/eliminar", empleadosController.eliminar);
   requestsRouter.post("/empleados/actualizar", empleadosController.actualizar);
   requestsRouter.post("/empleados/consultar", empleadosController.consultar)
-
+  requestsRouter.post("/empleados/insertarMasivo", empleadosController.insertarMasivo)
+  
   //regionales
   requestsRouter.get("/regionales/listar/:value", regionalesController.listar);
   requestsRouter.get("/regionales/:key/:value", regionalesController.buscar);

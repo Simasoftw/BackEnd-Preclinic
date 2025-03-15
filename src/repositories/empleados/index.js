@@ -109,6 +109,40 @@ const repo = {
       };
     }
   },
+  insertarMasivo: async (objData) => {
+    try {
+
+      let status, failure_code, failure_message;
+
+      //find object
+      let response = await Model.insertMany(objData);
+
+      //set values
+      if (response != null && response.length > 0) {
+        //Set status
+        status = constants.SUCCEEDED_MESSAGE;
+      } else {
+        //Set status
+        status = constants.SUCCEEDED_MESSAGE;
+      }
+
+      //return response
+      return {
+        status: status,
+        datos: response,
+        failure_code: failure_code,
+        failure_message: failure_message,
+      };
+
+    } catch (e2) {
+      return {
+        status: constants.INTERNAL_ERROR_MESSAGE,
+        failure_code: e2.code,
+        failure_message: e2.message,
+      };
+    }
+  },
+
 
   async actualizar(objData) {
     try {

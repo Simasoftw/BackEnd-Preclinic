@@ -260,25 +260,56 @@ const repo = {
       let status, failure_code, failure_message;
 
       //find object
-      let response = await objModel.find(query, {
-        _id: 1,
-        Empresa: 1,
-        Rol: 1,
-        PrimerNombre: 1,
-        SegundoNombre: 1,
-        PrimerApellido: 1,
-        SegundoApellido: 1,
-        Cargo: 1,
-        NombreCompleto: 1,
-        Email: 1,
-        Identificacion: 1,
-        Departamento: 1,
-        Dv: 1,
-        CodigoTipoIdentificacion: 1,
-        RolEvaluacion: 1,
-        IdRolEvaluacion: 1,
-        IdLider: 1,
-      }).populate('IdRol');
+      let response = await objModel.aggregate([
+        { $match: query },  
+        { $lookup: { from: 'roles', localField: 'IdRol', foreignField: '_id', as: 'dataRol' } },
+        { $unwind: '$dataRol' },
+        { $lookup: { from: 'configuracion_empresas', localField: 'IdEmpresa', foreignField: '_id', as: 'dataEmpresa' } },
+        { $unwind: '$dataEmpresa' },
+        {
+          $project: {
+            _id: 1,
+            SolicitudCambioClave: '$dataEmpresa.SolicitudCambioClave',
+            IdRol: '$dataRol',
+            PrimerNombre: 1,
+            SegundoNombre: 1,
+            PrimerApellido: 1,
+            SegundoApellido: 1,
+            Cargo: 1,
+            NombreCompleto: 1,
+            Email: 1,
+            Identificacion: 1,
+            Departamento: 1,
+            Dv: 1,
+            CodigoTipoIdentificacion: 1,
+            RolEvaluacion: 1,
+            IdRolEvaluacion: 1,
+            IdLider: 1,
+            EstadoCambioClave: 1
+          }
+        }
+      ]);
+      
+      
+      // find(query, {
+      //   _id: 1,
+      //   Empresa: 1,
+      //   Rol: 1,
+      //   PrimerNombre: 1,
+      //   SegundoNombre: 1,
+      //   PrimerApellido: 1,
+      //   SegundoApellido: 1,
+      //   Cargo: 1,
+      //   NombreCompleto: 1,
+      //   Email: 1,
+      //   Identificacion: 1,
+      //   Departamento: 1,
+      //   Dv: 1,
+      //   CodigoTipoIdentificacion: 1,
+      //   RolEvaluacion: 1,
+      //   IdRolEvaluacion: 1,
+      //   IdLider: 1,
+      // }).populate('IdRol');
 
       let token = null;
 

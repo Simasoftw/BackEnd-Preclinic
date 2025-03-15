@@ -4,7 +4,10 @@ const schema = mongoose.Schema;
 
 const Schema = schema({
     Nombre: String,
-    Codigo: String
+    Codigo: String,
+    IdEmpresa: String,
+    Descripcion: String,
+    Estado: String,
 })
     
 
