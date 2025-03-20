@@ -88,6 +88,7 @@ module.exports = () => {
   requestsRouter.get("/competencias/listar/:value", competenciasController.listar);
   requestsRouter.get("/competencias/:key/:value", competenciasController.buscar);
   requestsRouter.post("/competencias/insertar", competenciasController.insertar);
+  requestsRouter.post("/competencias/insertarMasivo", competenciasController.insertarMasivo);
   requestsRouter.post("/competencias/eliminar", competenciasController.eliminar);
   requestsRouter.post("/competencias/actualizar", competenciasController.actualizar);
   requestsRouter.post("/competencias/consultar", competenciasController.consultar)
