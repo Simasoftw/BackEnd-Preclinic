@@ -88,6 +88,7 @@ module.exports = () => {
   requestsRouter.get("/competencias/listar/:value", competenciasController.listar);
   requestsRouter.get("/competencias/:key/:value", competenciasController.buscar);
   requestsRouter.post("/competencias/insertar", competenciasController.insertar);
+  requestsRouter.post("/competencias/insertarMasivo", competenciasController.insertarMasivo);
   requestsRouter.post("/competencias/eliminar", competenciasController.eliminar);
   requestsRouter.post("/competencias/actualizar", competenciasController.actualizar);
   requestsRouter.post("/competencias/consultar", competenciasController.consultar)
@@ -118,7 +119,8 @@ module.exports = () => {
   requestsRouter.post("/empleados/eliminar", empleadosController.eliminar);
   requestsRouter.post("/empleados/actualizar", empleadosController.actualizar);
   requestsRouter.post("/empleados/consultar", empleadosController.consultar)
-
+  requestsRouter.post("/empleados/insertarMasivo", empleadosController.insertarMasivo)
+  
   //regionales
   requestsRouter.get("/regionales/listar/:value", regionalesController.listar);
   requestsRouter.get("/regionales/:key/:value", regionalesController.buscar);

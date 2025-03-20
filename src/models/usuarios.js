@@ -40,7 +40,7 @@ const usuariosSchema = schema({
     CarqueAutomatico: Boolean,
     RolEvaluacion: String,
     IdRolEvaluacion: String,
-    IdLider: String
+    IdLider: String, 
 });
 
 const usuarios = mongoose.model('usuarios', usuariosSchema);
