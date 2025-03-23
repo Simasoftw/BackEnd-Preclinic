@@ -57,6 +57,7 @@ module.exports = () => {
   requestsRouter.get("/areas/listar/:value", areasController.listar);
   requestsRouter.get("/areas/:key/:value", areasController.buscar);
   requestsRouter.post("/areas/insertar", areasController.insertar);
+  requestsRouter.post("/areas/insertarMasivo", areasController.insertarMasivo);
   requestsRouter.post("/areas/eliminar", areasController.eliminar);
   requestsRouter.post("/areas/actualizar", areasController.actualizar);
   requestsRouter.post("/areas/consultar", areasController.consultar)
@@ -73,13 +74,16 @@ module.exports = () => {
   requestsRouter.get("/cargos/listar/:value", cargosController.listar);
   requestsRouter.get("/cargos/:key/:value", cargosController.buscar);
   requestsRouter.post("/cargos/insertar", cargosController.insertar);
+  requestsRouter.post("/cargos/insertarMasivo", cargosController.insertarMasivo);
   requestsRouter.post("/cargos/eliminar", cargosController.eliminar);
   requestsRouter.post("/cargos/actualizar", cargosController.actualizar);
   requestsRouter.post("/cargos/consultar", cargosController.consultar)
 
+  //sedes
   requestsRouter.get("/sedes/listar/:value", sedesController.listar);
   requestsRouter.get("/sedes/:key/:value", sedesController.buscar);
   requestsRouter.post("/sedes/insertar", sedesController.insertar);
+  requestsRouter.post("/sedes/insertarMasivo", sedesController.insertarMasivo);
   requestsRouter.post("/sedes/eliminar", sedesController.eliminar);
   requestsRouter.post("/sedes/actualizar", sedesController.actualizar);
   requestsRouter.post("/sedes/consultar", sedesController.consultar)
@@ -116,10 +120,10 @@ module.exports = () => {
   requestsRouter.get("/empleados/listar/:value", empleadosController.listar);
   requestsRouter.get("/empleados/:key/:value", empleadosController.buscar);
   requestsRouter.post("/empleados/insertar", empleadosController.insertar);
+  requestsRouter.post("/empleados/insertarMasivo", empleadosController.insertarMasivo)
   requestsRouter.post("/empleados/eliminar", empleadosController.eliminar);
   requestsRouter.post("/empleados/actualizar", empleadosController.actualizar);
   requestsRouter.post("/empleados/consultar", empleadosController.consultar)
-  requestsRouter.post("/empleados/insertarMasivo", empleadosController.insertarMasivo)
   
   //regionales
   requestsRouter.get("/regionales/listar/:value", regionalesController.listar);
@@ -133,6 +137,7 @@ module.exports = () => {
   requestsRouter.get("/preguntas/listar/:value", preguntasController.listar);
   requestsRouter.get("/preguntas/:key/:value", preguntasController.buscar);
   requestsRouter.post("/preguntas/insertar", preguntasController.insertar);
+  requestsRouter.post("/preguntas/insertarMasivo", preguntasController.insertarMasivo);
   requestsRouter.post("/preguntas/eliminar", preguntasController.eliminar);
   requestsRouter.post("/preguntas/actualizar", preguntasController.actualizar);
   requestsRouter.post("/preguntas/consultar", preguntasController.consultar)
