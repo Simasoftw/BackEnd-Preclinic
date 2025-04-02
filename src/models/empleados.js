@@ -5,7 +5,7 @@ const schema = mongoose.Schema;
 const Schema = schema({ 
     IDEN1: String
     ,Identificacion: Number
-    ,PrimerNombre: String
+    ,PrimerNombre: String 
     ,PrimerApellido: String
     ,SegundoApellido: String
     ,NombreCompleto: String
