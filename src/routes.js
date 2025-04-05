@@ -34,6 +34,8 @@ module.exports = () => {
   const resultadoEvaluacionController = require("./controllers/resultadoEvaluacion");
   const desempenoController = require("./controllers/desepenoEvaluaciones")
   const rangoDesempenoController = require("./controllers/rangoDesempeno");   
+  const consecutivosController = require("./controllers/consecutivos");   
+
 
 
   // Aplica la validación JWT a todas las rutas debajo con authenticateJWT
@@ -78,6 +80,16 @@ module.exports = () => {
   requestsRouter.post("/cargos/eliminar", cargosController.eliminar);
   requestsRouter.post("/cargos/actualizar", cargosController.actualizar);
   requestsRouter.post("/cargos/consultar", cargosController.consultar)
+
+
+  //consecutivos
+  requestsRouter.post("/consecutivos/listar/", consecutivosController.listar);
+  requestsRouter.get("/consecutivos/:key/:value", consecutivosController.buscar);
+  requestsRouter.post("/consecutivos/insertar", consecutivosController.insertar);
+  requestsRouter.post("/consecutivos/insertarMasivo", consecutivosController.insertarMasivo);
+  requestsRouter.post("/consecutivos/eliminar", consecutivosController.eliminar);
+  requestsRouter.post("/consecutivos/actualizar", consecutivosController.actualizar);
+  requestsRouter.post("/consecutivos/consultar", consecutivosController.consultar)
 
   //sedes
   requestsRouter.get("/sedes/listar/:value", sedesController.listar);
