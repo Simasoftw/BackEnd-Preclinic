@@ -282,26 +282,73 @@ const repo = {
     try {
 
         //find object
-        let response = await Model.aggregate([
+        let response = await ModelDetalleAsig.aggregate([
           { $match: {} }, // Etapa para filtrar documentos (en este caso no filtra nada).
+          {
+            $lookup: {
+              from: "resultadoevaluaciones",
+              let: { localNumeroDocumento: "$NumeroDocumentoEmpleado", localIdAsignacion: { $toString: "$_id" } },
+              pipeline: [
+                {
+                  $match: {
+                    $expr: {
+                      $and: [
+                        { $eq: ["$NumeroDocumentoEmpleado", "$$localNumeroDocumento"] },
+                        { $eq: ["$IdAsignacion", "$$localIdAsignacion" ] }
+                      ]
+                    }
+                  }
+                }
+              ],
+              as: "resultadoInfo"
+            }
+          },           
+          {
+            $unwind: {
+              path: "$resultadoInfo",  
+              preserveNullAndEmptyArrays: true  
+            }
+          },
+          {
+            $addFields: {
+              competencia: {
+                $ifNull: ["$resultadoInfo.promedioGeneralPorcentaje", null] 
+              },
+              createdAt: {
+                $ifNull: ["$resultadoInfo.createdAt", null]  // Traer el campo createdAt de resultadoevaluaciones
+              }
+            }
+          },
           {
               $project: {
                   _id: "$_id",
                   Lider: "$NombreLider",
-                  Colaborador: "$NombreColaborador",
+                  Colaborador: "$NombreEmpleado",
                   SedeColaborador: "$SedeEmpleado.label",
                   AreaColaborador: "$AreaServicioEmpleado.label",
                   CargoColaborador: "$CargoEmpleado.label",
-                  FechaRegistro: "$fecha",
-                  TipoEvaluacion: "$titulo",
-                  promedioGeneral: "$promedioGeneralPorcentaje",
-                  arrayCompetencias: { competencia: 1,
-                    promedioPorcentaje: 1},
-                  EstadoAceptacion: "$Aceptacion",
-                  FechaRespuestaColaborador: "$FechaAceptacion",
-                  Justificacion: "$Justificacion",
-                  FechaRespuestaLider: "$FechaRespuesta",
-                  RespuestaLider: "$RespuestaLider"
+                  FechaRealizacion: "$resultadoInfo.createdAt",
+                  TipoEvaluacion: "$NombreEvaluacion",
+                  promedioGeneral: "$resultadoInfo.promedioGeneralPorcentaje",
+                  arrayCompetencias:  {
+                    $map: {
+                        input: {
+                            $ifNull: ["$resultadoInfo.arrayCompetencias", []] // Asegura que sea un array
+                        },
+                        as: "resultado",
+                        in: {
+                            competencia: "$$resultado.competencia",
+                            promedioPorcentaje: "$$resultado.promedioPorcentaje"
+                        }
+                    }
+                  },
+                  EstadoAceptacion: "$resultadoInfo.Aceptacion",
+                  FechaRespuestaColaborador: "$resultadoInfo.FechaAceptacion",
+                  Justificacion: "$resultadoInfo.Justificacion",
+                  FechaRespuestaLider: "$resultadoInfo.FechaRespuesta",
+                  RespuestaLider: "$resultadoInfo.RespuestaLider",
+                  arrayPreguntasLibres: "$resultadoInfo.arrayPreguntasLibres",
+                  Estado: "$Estado"
               }
           },
           { $sort: { Colaborador: 1 } } // Ordena por el campo 'Colaborador' en orden ascendente.

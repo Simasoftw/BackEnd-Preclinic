@@ -3,7 +3,8 @@ const schema = mongoose.Schema;
 
 const Schema = schema({
     nombre: String,
-    arrayRangos: Array
+    arrayRangos: Array,
+    arrayClasificacion: Array
 });
 
 const rangoDesempeno = mongoose.model("rangoDesempeno", Schema);
