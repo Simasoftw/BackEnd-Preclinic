@@ -20,7 +20,7 @@ const repo = {
       //find query
       let query = {};
       query[findObject.key] = findObject.value;
-
+      console.log(query);
       //find object
       let response = await objModel.find(query).sort('Nombre');
 
