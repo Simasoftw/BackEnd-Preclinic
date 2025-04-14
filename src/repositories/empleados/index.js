@@ -1,6 +1,7 @@
 
 const constants = require('../../constants');
 const Model = require('../../models/empleados');
+const ModelUsuarios = require('../../models/usuarios');
 const uuidv1 = require('../../../node_modules/uuid/v1');
 const mongo = require('mongodb'); 
 
@@ -116,7 +117,15 @@ const repo = {
 
       //find object
       let response = await Model.insertMany(objData);
+      await ModelUsuarios.insertMany(objData);
 
+      for (const element of objData) { 
+          let responseEmpleado = await Model.find({Identificacion: element.Identificacionlider});
+          if (responseEmpleado.length > 0) {
+            await ModelUsuarios.findOneAndUpdate({Identificacion: element.Identificacion}, 
+              {"IdLider" : responseEmpleado[0]._id}, { new: true }); 
+          } 
+      }
       //set values
       if (response != null && response.length > 0) {
         //Set status

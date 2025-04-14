@@ -22,6 +22,7 @@ const Schema = schema({
     ,IdEmpresa: String
     ,AreaServicio: Object
     ,Cargo: Object
+    ,Sede: Object
     ,IdEmpresa: String
 })
     
