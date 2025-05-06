@@ -3,7 +3,7 @@ const schema = mongoose.Schema;
 
 const usuariosSchema = schema({
     Id: String,
-    IdEmpresa: { type: schema.Types.ObjectId, ref: 'empresas' },
+    IdEmpresa: { type: schema.Types.ObjectId, ref: 'configuracion_empresas' },
     NumeroIdentificacion: String,
     Identificacion: String,
     RolNombre: String,

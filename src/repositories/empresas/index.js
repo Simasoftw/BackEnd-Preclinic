@@ -19,8 +19,8 @@ const repo = {
     try {
       //find query
       let query = {};
-      query[findObject.key] = findObject.value;
-      console.log(query);
+      query[findObject.key] = findObject.value; 
+      
       //find object
       let response = await objModel.find(query).sort('Nombre');
 

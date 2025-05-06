@@ -12,7 +12,7 @@ const rolSchema = schema({
 	Permisos: Array,
 	id: String,
 	text: String,
-    Empresa: { type: schema.Types.ObjectId, ref: 'empresas' }
+    Empresa: { type: schema.Types.ObjectId, ref: 'configuracion_empresas' }
 });
 
 const roles = mongoose.model('roles', rolSchema);

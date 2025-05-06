@@ -15,7 +15,7 @@ const Schema = schema({
     Estado: String,
     Pais: String,
     Municipio: String,
-    IdEmpresa: String
+    IdEmpresa:  { type: schema.Types.ObjectId, ref: 'configuracion_empresas' }
 })
     
 
